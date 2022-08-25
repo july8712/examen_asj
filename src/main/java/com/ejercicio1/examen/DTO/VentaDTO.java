@@ -2,13 +2,17 @@ package com.ejercicio1.examen.DTO;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class VentaDTO {
-    private Long idVenta;
-    private Long idProducto;
-    private Long idVendedor;
-    private double comision;
-    private int cantidadProductos;
-    private double totalVenta;
 
+    private Long codigo;
+
+    private VendedorDTO vendedorDTO;
+
+    private Set<ProductoDTO> producto;
 }
+
+
+

@@ -1,22 +1,46 @@
 package com.ejercicio1.examen.mapper;
 
 import com.ejercicio1.examen.DTO.VendedorDTO;
-import com.ejercicio1.examen.DTO.VentaDTO;
-import com.ejercicio1.examen.entities.Vendedor;
-import com.ejercicio1.examen.entities.Venta;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ejercicio1.examen.entities.VendedorEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class VendedorMapper {
-    @Autowired
-    private ObjectMapper objectMapper;
-    public Vendedor toEntity(VendedorDTO vendedorDTO){
-        return objectMapper.convertValue(vendedorDTO, Vendedor.class);
-
+    public VendedorEntity toEntity(VendedorDTO vendedorDTO){
+        VendedorEntity vendedorEntity = new VendedorEntity();
+        vendedorEntity.setCodigo(vendedorDTO.getCodigo());
+        vendedorEntity.setNombre(vendedorDTO.getNombre());
+        vendedorEntity.setSueldo(vendedorDTO.getSueldo());
+        return vendedorEntity;
     }
-    public VendedorDTO toDTO(Vendedor vendedor){
-        return objectMapper.convertValue(vendedor, VendedorDTO.class);
+
+    public VendedorDTO toDTO(VendedorEntity vendedorEntity){
+        VendedorDTO vendedorDTO = new VendedorDTO();
+        vendedorDTO.setCodigo(vendedorEntity.getCodigo());
+        vendedorDTO.setNombre(vendedorEntity.getNombre());
+        vendedorDTO.setSueldo(vendedorEntity.getSueldo());
+        return vendedorDTO;
+    }
+
+    public List<VendedorDTO> toListDTO(List<VendedorEntity> list){
+        List<VendedorDTO> lista = new ArrayList<>();
+
+        for (VendedorEntity vendedorEntity : list) {
+            lista.add(toDTO(vendedorEntity));
+        }
+
+        return lista;
+    }
+
+    public VendedorEntity toSet(VendedorEntity vendedorEntity, VendedorDTO vendedorDTO){
+        VendedorEntity vendedorActualizado = new VendedorEntity();
+        vendedorActualizado.setNombre(vendedorDTO.getNombre());
+        vendedorActualizado.setSueldo(vendedorDTO.getSueldo());
+        vendedorActualizado.setCodigo(vendedorDTO.getCodigo());
+
+        return vendedorActualizado;
     }
 }

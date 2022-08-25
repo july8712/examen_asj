@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class VendedorDTO {
-    private Long idVendedor;
-    private String codigo;
-    private String nombreVendedor;
+    private Long codigo;
+    private String nombre;
     private double sueldo;
+    private double comision;
+    private double sueldoTotal;
 }
